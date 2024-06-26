@@ -17,5 +17,5 @@ public class ScrapResult {
     public ScrapResult() {
         this.dividendList = new ArrayList<>();
     }
-    
+
 }
