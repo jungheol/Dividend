@@ -18,6 +18,7 @@ import java.util.List;
 public class YahooFinanceScraper {
 
     private static final String STATISTICS_URL = "https://finance.yahoo.com/quote/%s/history/?frequency=1mo&period1=%d&period2=%d";
+    private static final String SUMMARY_URL = "https://finance.yahoo.com/quote/%s?p=%s";
     private static final long START_TIME = 86400;
 
     public ScrapResult scrap(Company company) {
@@ -67,6 +68,20 @@ public class YahooFinanceScraper {
     }
 
     public Company scrapCompanyByTicker(String ticker) {
+        String url = String.format(SUMMARY_URL, ticker, ticker);
+
+        try {
+            Document document = Jsoup.connect(url).get();
+            Element titleElement = document.getElementsByTag("h1").get(1);
+            String title = titleElement.text().split(" \\(")[0];
+
+            return Company.builder()
+                    .ticker(ticker)
+                    .name(title)
+                    .build();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
