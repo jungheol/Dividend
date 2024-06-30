@@ -20,4 +20,8 @@ spring:
     username: sa
     password:
 
+scheduler:
+  scrap:
+    yahoo: "0 0 0 * * *"
+
 
