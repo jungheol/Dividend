@@ -3,6 +3,7 @@ package com.example.zerobase.dividend.service;
 import com.example.zerobase.dividend.model.Company;
 import com.example.zerobase.dividend.model.Dividend;
 import com.example.zerobase.dividend.model.ScrapResult;
+import com.example.zerobase.dividend.model.constants.CacheKey;
 import com.example.zerobase.dividend.persist.CompanyRepository;
 import com.example.zerobase.dividend.persist.DividendRepository;
 import com.example.zerobase.dividend.persist.entity.CompanyEntity;
@@ -12,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +24,7 @@ public class FinanceService {
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
 
-    @Cacheable(key = "#companyName", value = "finance")
+    @Cacheable(key = "#companyName", value = CacheKey.KEY_FINANCE)
     public ScrapResult getDividendByCompanyName(String companyName) {
         log.info("search company -> " + companyName);
         // 회사명을 기준으로 회사 정보를 조회
