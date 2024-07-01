@@ -1,4 +1,4 @@
-package com.example.zerobase.dividend.model;
+package com.example.zerobase.dividend.persist.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -36,11 +36,6 @@ public class MemberEntity implements UserDetails {
         return this.roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public String getUsername() {
-        return "";
     }
 
     @Override
